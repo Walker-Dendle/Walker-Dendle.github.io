@@ -1,0 +1,64 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.1">
+  <style type="text/css">
+  </style>
+</head>
+<body id = "mainBody" style="background-color:WhiteSmoke;">
+    <table style="height: 134px; width: 69.8739%; border-collapse: collapse; background-color: white; margin-left: auto; margin-right: auto;" border="0" cellpadding="10">
+    <tbody>
+    <tr style="height: 102px;">
+    <td style="width: 100%; text-align: center; height: 102px;">
+    <h2 id = "lblName" style="text-align: left;"></h2>
+    <p id = "lblEmail" style="text-align: left;"></p>
+    <p><button onclick="unsubscribe()">Unsubscribe</button></p>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+
+    <script type="text/javascript">
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        
+        const candidate_name = urlParams.get('name')
+        document.getElementById("lblName").innerHTML = "Hello " + candidate_name + "!";
+        
+        const candidate_email = urlParams.get('email')
+        document.getElementById("lblEmail").innerHTML = "Your email is <b>" + candidate_email + "</b>";
+        
+    </script>
+    
+    <script>
+        var unsubscribe = function(){
+            const candidate_id = urlParams.get('id')
+            var url = "https://nigcpj6h82.execute-api.us-east-1.amazonaws.com/Live/unsubscribe?candidateId=" + candidate_id;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("PATCH", url);
+
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+               if (xhr.readyState === 4) {
+                   alert("You have unsubscribed from future mailshots. Please note it may take up to 5 days for this to take effect.");
+                
+               }};
+
+            
+
+            xhr.send();
+            
+        }
+    </script>
+    
+    
+
+</body>
+</html>
